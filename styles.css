@@ -1,0 +1,17 @@
+#display {
+    height: 100px;
+    border: black solid 1px;
+    width: 210px;
+}
+#buttonBox {
+    display: flex;
+    width: 210px;
+    flex-wrap: wrap;
+}
+
+
+
+button {
+    height: 50px;
+    width: 50px;
+}
