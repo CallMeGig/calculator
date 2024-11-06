@@ -1,16 +1,19 @@
 // page setup
 
 const buttonBox = document.querySelector('#buttonBox');
-const calcSymbols = [0,1,2,3,4,5,6,7,8,9,'/','*','-','+','clr'];
+const calcSymbols = [1,2,3,'+',4,5,6,'-',7,8,9,'*',0,'clr','','/'];
 
-const buttons = calcSymbols.map((symbol) => {
+calcSymbols.map((symbol) => {
     let button = document.createElement('button');
     button.textContent = symbol;
     buttonBox.appendChild(button);
-    return button;
+    button.addEventListener('click', onBtnClick);
 })
 
-// variables
+function onBtnClick(event) {
+    let btn = event.target;
+    console.log(btn.textContent);
+}
 
 let num1;
 let operator;
@@ -44,6 +47,7 @@ function setOperator(sign) {
 }
 
 // calculator functions
+
 
 // operate
 function operate(operator, num1, num2) {
