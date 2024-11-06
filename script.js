@@ -1,9 +1,13 @@
 // page setup
 
 const buttonBox = document.querySelector('#buttonBox');
-const calcSymbols = [1,2,3,'+',4,5,6,'-',7,8,9,'*',0,'clr','','/'];
+const SYMBOLS = [1,2,3,'+',4,5,6,'-',7,8,9,'*',0,'clr','','/'];
 
-calcSymbols.map((symbol) => {
+const displayBox = document.querySelector('#display');
+let displayText = "";
+
+
+SYMBOLS.map((symbol) => {
     let button = document.createElement('button');
     button.textContent = symbol;
     buttonBox.appendChild(button);
@@ -12,7 +16,13 @@ calcSymbols.map((symbol) => {
 
 function onBtnClick(event) {
     let btn = event.target;
-    console.log(btn.textContent);
+    let text = btn.textContent;
+    addToDisplay(text);
+}
+
+function addToDisplay(text) {
+    displayText = displayText + text;
+    displayBox.textContent = displayText;
 }
 
 let num1;
