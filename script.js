@@ -1,6 +1,6 @@
 // page setup
 
-const BUTTONBOX = document.querySelector('#BUTTONBOX');
+const BUTTONBOX = document.querySelector('#buttonBox');
 const SYMBOLS = [1,2,3,'+',4,5,6,'-',7,8,9,'*',0,'=','clr','/'];
 const OPERATORS = SYMBOLS.filter((symbol) => {
     if ((typeof symbol !== "number") && (symbol != "clr")) {
