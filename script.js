@@ -1,21 +1,21 @@
 // page setup
 
-const buttonBox = document.querySelector('#buttonBox');
+const BUTTONBOX = document.querySelector('#BUTTONBOX');
 const SYMBOLS = [1,2,3,'+',4,5,6,'-',7,8,9,'*',0,'=','clr','/'];
 const OPERATORS = SYMBOLS.filter((symbol) => {
     if ((typeof symbol !== "number") && (symbol != "clr")) {
         return symbol;
     }
 })
-console.log(OPERATORS);
-const displayBox = document.querySelector('#display');
+
+const DISPLAYBOX = document.querySelector('#display');
 let displayText = "";
 
 
 SYMBOLS.map((symbol) => {
     let button = document.createElement('button');
     button.textContent = symbol;
-    buttonBox.appendChild(button);
+    BUTTONBOX.appendChild(button);
     button.addEventListener('click', onBtnClick);
 })
 
@@ -28,11 +28,11 @@ function onBtnClick(event) {
 
 function addToDisplay(text) {
     displayText = displayText + text;
-    displayBox.textContent = displayText;
+    DISPLAYBOX.textContent = displayText;
 }
 
 function clearDisplay() {
-    displayBox.textContent = '';
+    DISPLAYBOX.textContent = '';
     displayText = '';
 }
 
