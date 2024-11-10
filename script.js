@@ -10,7 +10,15 @@ const OPERATORS = SYMBOLS.filter((symbol) => {
 
 const DISPLAYBOX = document.querySelector('#display');
 let displayText = "";
+let num1;
+let num1String = '';
+let operator = '';
+let operatorString = '';
+let num2;
+let num2String = '';
+let result;
 
+console.log(OPERATORS);
 
 SYMBOLS.map((symbol) => {
     let button = document.createElement('button');
@@ -23,27 +31,69 @@ function onBtnClick(event) {
     let btn = event.target;
     let text = btn.textContent;
 
-    text === 'clr' ? clearDisplay() : checkSymbol(text);
+    checkSymbol(text);
+
+
+    console.log('num1String');
+    console.log(num1String);
+    console.log('num1');
+    console.log(num1);
+    console.log('operatorString');
+    console.log(operatorString);
+    console.log('operator');
+    console.log(operator);
+    console.log('num2String');
+    console.log(num2String);
+    console.log('num2');
+    console.log(num2);
+
 }
 
 function addToDisplay(text) {
     displayText = displayText + text;
+    console.log('displayText');
+    console.log(displayText);
     DISPLAYBOX.textContent = displayText;
 }
 
 function clearDisplay() {
     DISPLAYBOX.textContent = '';
     displayText = '';
+    operatorString = '';
+    num1String = '';
+    num2String = '';
+
+}
+function ensureOneOperator(text) {
+    let last = displayText.slice(-1);
+    if (OPERATORS.includes(last)) {
+        displayText = displayText.slice(0,-1);
+    }
+    operatorString = text
 }
 
 function checkSymbol(text) {
-    addToDisplay(text);
+    if (text === 'clr') {
+        clearDisplay()
+    } else if (OPERATORS.includes(text)) {
+        num1String === '' ? num1 = undefined : num1 = Number(num1String);
+        operatorString.length == 0 ? operatorString = text : ensureOneOperator(text);
+
+    } else { //numbers
+        if (num1 === undefined) {
+            num1String += text;
+        } else {
+            num2String += text;
+
+        }
+    }
+
+    if (text !== 'clr') {
+        addToDisplay(text);
+    }
+
 }
 
-let num1;
-let operator;
-let num2;
-let result;
 
 // helper
 
@@ -91,8 +141,6 @@ function operate(operator, num1, num2) {
             result = divide(num1,num2);
             break;
     }
-
-
 }
 
 // add
