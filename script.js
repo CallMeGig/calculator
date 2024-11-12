@@ -46,6 +46,7 @@ function onBtnClick(event) {
     console.log(num2String);
     console.log('num2');
     console.log(num2);
+    console.log('-----')
 
 }
 
@@ -56,20 +57,27 @@ function addToDisplay(text) {
     DISPLAYBOX.textContent = displayText;
 }
 
-function clearDisplay() {
-    DISPLAYBOX.textContent = '';
+function resetVariables() {
     displayText = '';
     operatorString = '';
+    num1 = undefined;
     num1String = '';
+    num2 = undefined;
     num2String = '';
+}
+
+function clearDisplay() {
+    DISPLAYBOX.textContent = '';
+    resetVariables();
 
 }
+
 function ensureOneOperator(text) {
     let last = displayText.slice(-1);
     if (OPERATORS.includes(last)) {
         displayText = displayText.slice(0,-1);
     }
-    operatorString = text
+    operatorString = text;
 }
 
 function checkSymbol(text) {
@@ -77,13 +85,15 @@ function checkSymbol(text) {
         clearDisplay()
     } else if (OPERATORS.includes(text)) {
         num1String === '' ? num1 = undefined : num1 = Number(num1String);
-        operatorString.length == 0 ? operatorString = text : ensureOneOperator(text);
-
+        operatorString.length == 0 && num2 == undefined? operatorString = text : ensureOneOperator(text);
+        num1 !== undefined && num2String === '' ? num2 = undefined : Number(num2String);
     } else { //numbers
         if (num1 === undefined) {
             num1String += text;
         } else {
             num2String += text;
+
+            operator == '' ? operator = operatorString : operate(operator,Number(num1String),Number(num2String));
 
         }
     }
@@ -91,34 +101,6 @@ function checkSymbol(text) {
     if (text !== 'clr') {
         addToDisplay(text);
     }
-
-}
-
-
-// helper
-
-function getNum1() {
-    return num1;
-}
-
-function setNum1(num) {
-    num1 = num;
-}
-
-function getNum2() {
-    return num2;
-}
-
-function setNum2(num) {
-    num2 = num;
-}
-
-function getOperator() {
-    return operator;
-}
-
-function setOperator(sign) {
-    operator = sign;
 }
 
 // calculator functions
