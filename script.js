@@ -46,12 +46,16 @@ function onBtnClick(event) {
     console.log(num2String);
     console.log('num2');
     console.log(num2);
-    console.log('-----')
+    console.log('result');
+    console.log(result);
+    console.log('-----');
 
 }
 
 function addToDisplay(text) {
-    displayText = displayText + text;
+    if (text != '=') {
+        displayText = displayText + text;
+    }
     console.log('displayText');
     console.log(displayText);
     DISPLAYBOX.textContent = displayText;
@@ -60,6 +64,7 @@ function addToDisplay(text) {
 function resetVariables() {
     displayText = '';
     operatorString = '';
+    operator = '';
     num1 = undefined;
     num1String = '';
     num2 = undefined;
@@ -73,20 +78,56 @@ function clearDisplay() {
 }
 
 function ensureOneOperator(text) {
+    // removes the last character from the display text if it is an operator
     let last = displayText.slice(-1);
     if (OPERATORS.includes(last)) {
         displayText = displayText.slice(0,-1);
     }
+    // sets operatorString to the provided string
     operatorString = text;
+}
+
+function setNum1() {
+    if (num1String !== '') {
+        num1 = Number(num1String);
+    }
+}
+
+function setFirstOperator(text) {
+    if (num1 !== undefined) {
+        operatorString.length == 0 && num2 == undefined ? operatorString = text : ensureOneOperator(text);
+    } else if (num1 == undefined) {
+        operatorString = '';
+        displayText = '';
+    }
+    console.log('here');
+}
+
+function setNum2() {
+    if (num2String !== '') {
+        num2 = Number(num2String);
+    }
+}
+
+function getResult(text) {
+    setNum2();
+    operate(operator, num1, num2);
+    clearDisplay();
+    num1String = result;
+    setNum1();
+    displayText = String(num1);
+    if (text !== '=') {
+        setFirstOperator(text);
+    }
 }
 
 function checkSymbol(text) {
     if (text === 'clr') {
         clearDisplay()
     } else if (OPERATORS.includes(text)) {
-        num1String === '' ? num1 = undefined : num1 = Number(num1String);
-        operatorString.length == 0 && num2 == undefined? operatorString = text : ensureOneOperator(text);
-        num1 !== undefined && num2String === '' ? num2 = undefined : Number(num2String);
+        // check if num1 is defined
+        setNum1();
+        operator === '' ? setFirstOperator(text) : getResult(text);
     } else { //numbers
         if (num1 === undefined) {
             num1String += text;
@@ -98,7 +139,7 @@ function checkSymbol(text) {
         }
     }
 
-    if (text !== 'clr') {
+    if (text !== 'clr' && num1String !== '') {
         addToDisplay(text);
     }
 }
