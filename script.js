@@ -1,7 +1,7 @@
 // page setup
 
 const BUTTONBOX = document.querySelector('#buttonBox');
-const SYMBOLS = [1,2,3,'+',4,5,6,'-',7,8,9,'*',0,'=','clr','/'];
+const SYMBOLS = [1,2,3,'+',4,5,6,'-',7,8,9,'x',0,'=','clr','/'];
 const OPERATORS = SYMBOLS.filter((symbol) => {
     if ((typeof symbol !== "number") && (symbol != "clr")) {
         return symbol;
@@ -21,6 +21,7 @@ let result;
 console.log(OPERATORS);
 
 SYMBOLS.map((symbol) => {
+    // create a button with a listener to each symbol mapped in array
     let button = document.createElement('button');
     button.textContent = symbol;
     BUTTONBOX.appendChild(button);
@@ -53,6 +54,7 @@ function onBtnClick(event) {
 }
 
 function addToDisplay(text) {
+    // add text to the current display unless the text is '='
     if (text != '=') {
         displayText = displayText + text;
     }
@@ -157,7 +159,7 @@ function operate(operator, num1, num2) {
         case '-':
             result = subtract(num1,num2);
             break;
-        case '*':
+        case 'x':
             result = multiply(num1,num2);
             break;
         case '/':
