@@ -16,7 +16,7 @@ let operator = '';
 let operatorString = '';
 let num2;
 let num2String = '';
-let result;
+let result = 0;
 
 console.log(OPERATORS);
 
@@ -51,6 +51,25 @@ function onBtnClick(event) {
     console.log(result);
     console.log('-----');
 
+}
+
+function getDisplayText() {
+    let text;
+
+    if (num2String != '') {
+        text = num2String;
+    } else if (num1String != '') {
+        text = num1String;
+    } else if (result != undefined) {
+        text = String(result);
+    } else text = "0";
+
+    return text;
+}
+
+function updateDisplay() {
+    displayText = getDisplayText()
+    DISPLAYBOX.textContent = displayText;
 }
 
 function addToDisplay(text) {
@@ -142,7 +161,7 @@ function checkSymbol(text) {
     }
 
     if (text !== 'clr' && num1String !== '') {
-        addToDisplay(text);
+        updateDisplay(text);
     }
 }
 
