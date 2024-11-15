@@ -18,8 +18,6 @@ let num2;
 let num2String = '';
 let result = 0;
 
-console.log(OPERATORS);
-
 SYMBOLS.map((symbol) => {
     // create a button with a listener to each symbol mapped in array
     let button = document.createElement('button');
@@ -33,24 +31,6 @@ function onBtnClick(event) {
     let text = btn.textContent;
 
     checkSymbol(text);
-
-
-    console.log('num1String');
-    console.log(num1String);
-    console.log('num1');
-    console.log(num1);
-    console.log('operatorString');
-    console.log(operatorString);
-    console.log('operator');
-    console.log(operator);
-    console.log('num2String');
-    console.log(num2String);
-    console.log('num2');
-    console.log(num2);
-    console.log('result');
-    console.log(result);
-    console.log('-----');
-
 }
 
 function getDisplayText() {
@@ -77,8 +57,7 @@ function addToDisplay(text) {
     if (text != '=') {
         displayText = displayText + text;
     }
-    console.log('displayText');
-    console.log(displayText);
+
     DISPLAYBOX.textContent = displayText;
 }
 
@@ -110,7 +89,6 @@ function setFirstOperator(text) {
         operatorString = '';
         displayText = '';
     }
-    console.log('here');
 }
 
 function setNum2() {
