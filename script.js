@@ -95,17 +95,6 @@ function resetVariables() {
 function clearDisplay() {
     DISPLAYBOX.textContent = '';
     resetVariables();
-
-}
-
-function ensureOneOperator(text) {
-    // removes the last character from the display text if it is an operator
-    let last = displayText.slice(-1);
-    if (OPERATORS.includes(last)) {
-        displayText = displayText.slice(0,-1);
-    }
-    // sets operatorString to the provided string
-    operatorString = text;
 }
 
 function setNum1() {
@@ -116,7 +105,7 @@ function setNum1() {
 
 function setFirstOperator(text) {
     if (num1 !== undefined) {
-        operatorString.length == 0 && num2 == undefined ? operatorString = text : ensureOneOperator(text);
+        operatorString = text;
     } else if (num1 == undefined) {
         operatorString = '';
         displayText = '';
