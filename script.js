@@ -9,6 +9,8 @@ const OPERATORS = SYMBOLS.filter((symbol) => {
 })
 
 const DISPLAYBOX = document.querySelector('#display');
+const DISPLAYLIMIT = 9;
+
 let displayText = "";
 let num1;
 let num1String = '';
@@ -19,21 +21,42 @@ let num2String = '';
 let result = 0;
 
 SYMBOLS.map((symbol) => {
-    // create a button with a listener to each symbol mapped in array
+    // create a button with a listener to each symbol mapped in array SYMBOLS
     let button = document.createElement('button');
     button.textContent = symbol;
     BUTTONBOX.appendChild(button);
     button.addEventListener('click', onBtnClick);
 })
 
+updateDisplay();
+
 function onBtnClick(event) {
     let btn = event.target;
     let text = btn.textContent;
 
     checkSymbol(text);
+
+
+    console.log('num1String');
+    console.log(num1String);
+    console.log('num1');
+    console.log(num1);
+    console.log('operatorString');
+    console.log(operatorString);
+    console.log('operator');
+    console.log(operator);
+    console.log('num2String');
+    console.log(num2String);
+    console.log('num2');
+    console.log(num2);
+    console.log('result');
+    console.log(result);
+    console.log('------------------');
+
 }
 
 function getDisplayText() {
+    // Returns the result or the current number a user is working on once defined
     let text;
 
     if (num2String != '') {
@@ -49,15 +72,6 @@ function getDisplayText() {
 
 function updateDisplay() {
     displayText = getDisplayText()
-    DISPLAYBOX.textContent = displayText;
-}
-
-function addToDisplay(text) {
-    // add text to the current display unless the text is '='
-    if (text != '=') {
-        displayText = displayText + text;
-    }
-
     DISPLAYBOX.textContent = displayText;
 }
 
@@ -93,6 +107,7 @@ function setFirstOperator(text) {
 
 function setNum2() {
     if (num2String !== '') {
+        num2String > 6
         num2 = Number(num2String);
     }
 }
@@ -101,8 +116,9 @@ function getResult(text) {
     setNum2();
     operate(operator, num1, num2);
     clearDisplay();
-    num1String = result;
-    setNum1();
+    updateDisplay();
+    //num1String = result;
+    //setNum1();
     displayText = String(num1);
     if (text !== '=') {
         setFirstOperator(text);
@@ -114,13 +130,15 @@ function checkSymbol(text) {
         clearDisplay()
     } else if (OPERATORS.includes(text)) {
         // check if num1 is defined
+        num1String == '' ? num1String = result: num1String;
         setNum1();
         operator === '' ? setFirstOperator(text) : getResult(text);
     } else { //numbers
         if (num1 === undefined) {
-            num1String += text;
+            num1String.length < DISPLAYLIMIT ? num1String += text: num1String = num1String;
         } else {
-            num2String += text;
+            num2String.length < DISPLAYLIMIT ? num2String += text: num2String = num2String;
+            //num2String += text;
 
             operator == '' ? operator = operatorString : operate(operator,Number(num1String),Number(num2String));
 
@@ -128,7 +146,7 @@ function checkSymbol(text) {
     }
 
     if (text !== 'clr' && num1String !== '') {
-        updateDisplay(text);
+        updateDisplay();
     }
 }
 
@@ -149,7 +167,7 @@ function operate(operator, num1, num2) {
             result = multiply(num1,num2);
             break;
         case '/':
-            result = divide(num1,num2);
+            num2 == 0 ?  displayText = 'Oops': result = divide(num1,num2);
             break;
     }
 }
