@@ -12,7 +12,7 @@ const DISPLAYBOX = document.querySelector('#display');
 const DISPLAYLIMIT = 9;
 const MSGDIVZERO = 'N00B';
 
-let displayText = "0";
+let displayText;
 let num1;
 let num1String = '';
 let operator = '';
@@ -85,7 +85,7 @@ function resetVariables() {
 }
 
 function clearDisplay() {
-    DISPLAYBOX.textContent = '';
+    DISPLAYBOX.textContent = '0';
     resetVariables();
 }
 
