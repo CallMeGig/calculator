@@ -8,6 +8,8 @@
     background: white;
     font-size: 86px;
     margin-top: 15px;
+    box-shadow: black 2px 2px 2px;
+
 }
 
 #buttonBox {
@@ -16,7 +18,28 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 4px;
+    margin-bottom: 8px;
+}
 
+button {
+    height: 113px;
+    width: 113px;
+    font: arial;
+    font-size: 48px;
+    border: solid black 1.5px;
+    border-radius: 10px;
+    background: rgb(220 220 250);
+    box-shadow: black 2px 2px 2px;
+    transition: all 0.05s;
+}
+
+button:hover {
+    background: rgb(210, 210, 250);
+}
+
+button:active {
+    background: grey;
+    color: white;
 }
 
 #calculator {
@@ -24,8 +47,8 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background: grey;
+    gap: 18px;
+    background: rgb(50, 30, 50, 50%);
     align-items: center;
 
 }
@@ -40,14 +63,4 @@ body {
     flex-direction: column;
     align-items: center;
     background: lightblue;
-}
-
-button {
-    height: 113px;
-    width: 113px;
-    font: arial;
-    font-size: 48px;
-    border: solid black 1.5px;
-    border-radius: 10px;
-    background: rgb(220 220 250);
 }
